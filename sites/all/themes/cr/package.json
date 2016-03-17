@@ -1,0 +1,29 @@
+{
+  "name": "cr",
+  "version": "1.0.0",
+  "description": "To help consolidate and remove possible future inconsistencies, the\r documentation for this sub-theme starter kit has been moved to:\r http://drupal.org/node/1978010.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "glob": "^5.0.3",
+    "gulp-less-sourcemap": "^1.4.2",
+    "gulp-util": "^3.0.4",
+    "gulp-watch": "^4.2.4",
+    "gulp-watch-less": "^1.0.1",
+    "through2": "^0.6.5",
+    "vinyl-ftp": "^0.4.0"
+  },
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-less": "^3.0.1",
+    "gulp-less-sourcemap": "^1.4.2",
+    "gulp-util": "^3.0.4",
+    "gulp-watch": "^4.2.0",
+    "gulp-watch-less": "^1.0.1",
+    "vinyl-ftp": "^0.4.0"
+  }
+}

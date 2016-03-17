@@ -1,0 +1,21 @@
+// Compatibility and Bugfixes 
+// for the Adminimal Administrative Theme
+
+body { 
+	&.admin-menu {margin-top: 29px !important}}
+		
+#admin-menu {backface-visibility: hidden; //Prevents Strange Visual Glitching.
+	ul {max-width: none;
+		li {margin-bottom: 0}}
+		
+	//Fix for Shortcut Link not wrapping properly and overlapping with other links.
+	.toolbar-shortcuts {width: 95px;height: 28px;
+		.menu {height: auto !important}
+	}
+	
+	//Fix to prevent the Account Links from Wrapping Separately from Each Other.
+	#admin-menu-account {float: right;
+		li {float: none;display: inline-block;
+			&.admin-menu-account {float: left}}}}
+			
+#overlay {backface-visibility: hidden} //Prevents Strange Visual Glitching.

@@ -1,0 +1,2 @@
+Added patch to commerce_license for renewing option
+Added patch to context module to negate user role https://www.drupal.org/node/996606

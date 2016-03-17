@@ -1,0 +1,58 @@
+// Behind-the-scenes Mixins, don't reference directly
+@mixin highdpicore($filename, $dimensions, $important) {
+	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {& {@include dpicore(2, $filename, $dimensions, $important)}}
+	@if	$maxPixelRatio >= 3 {
+	@media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 288dpi) {& {@include dpicore(3, $filename, false, $important)}}}}
+@mixin dpicore($increase, $filename, $dimensions, $important) {
+	background: {image: url($image-directory + $increase + "x/" + $filename)#{$important};
+	@if $dimensions {size: $dimensions}}}
+
+// Helpful mixins
+@mixin round($radius) {-webkit-border-radius: $radius;-moz-border-radius: $radius;border-radius: $radius}
+@mixin round-top($radius) {-webkit-border-top-left-radius: $radius;-webkit-border-top-right-radius: $radius;-moz-border-radius-topleft: $radius;-moz-border-radius-topright: $radius;border-top-left-radius: $radius;border-top-right-radius: $radius}
+@mixin round-bottom($radius) {-webkit-border-bottom-left-radius: $radius;-webkit-border-bottom-right-radius: $radius;-moz-border-radius-bottomleft: $radius;-moz-border-radius-bottomright: $radius;border-bottom-left-radius: $radius;border-bottom-right-radius: $radius}
+@mixin round-left($radius) {-webkit-border-top-left-radius: $radius;-webkit-border-bottom-left-radius: $radius;-moz-border-radius-topleft: $radius;-moz-border-radius-bottomleft: $radius;border-top-left-radius: $radius;border-bottom-left-radius: $radius}
+@mixin round-right($radius) {-webkit-border-bottom-right-radius: $radius;-webkit-border-top-right-radius: $radius;-moz-border-radius-bottomright: $radius;-moz-border-radius-topright: $radius;border-bottom-right-radius: $radius;border-top-right-radius: $radius}
+@mixin circle {@include round(50%)}
+@mixin transition($values){-moz-transition: $values;-webkit-transition: $values;-o-transition: $values;transition: $values}
+@mixin delay($values){-moz-transition-delay: $values;-webkit-transition-delay: $values;-o-transition-delay: $values;transition-delay: $values}
+@mixin transform($values){-moz-transform: $values;-webkit-transform: $values;-o-transform: $values;-ms-transform: $values;transform: $values}
+@mixin rotate($value){@include transform(rotate($value))}
+@mixin box-shadow($values1, $values2: false, $values3: false) {$temp: $values1;@if $values2 {$temp: $temp + ", " + $values2}@if $values3 {$temp: $temp + ", " + $values3}
+	-moz-box-shadow: #{$temp};-webkit-box-shadow: #{$temp};box-shadow: #{$temp}}
+@mixin highdpi($filename, $dimensions: false) {@include highdpicore($filename, $dimensions, "")}
+@mixin highdpiimportant($filename, $dimensions: false) {@include highdpicore($filename, $dimensions, " !important")}
+@mixin highdpires($x, $y) {
+	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {& {background-size: max(1px, floor($x/2)) max(1px, floor($y/2))}}
+	@if	$maxPixelRatio >= 3 {
+		@media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-pixel-ratio: 3) {& {background-size: max(1px, floor($x/3)) max(1px, floor($y/3))}}}}
+@mixin columns($count) {-moz-column-count: $count;-webkit-column-count: $count;column-count: $count}
+@mixin avoid-column-break { -webkit-column-break-inside:avoid;-moz-column-break-inside:avoid;-o-column-break-inside:avoid;-ms-column-break-inside:avoid;column-break-inside:avoid;float: left;clear: left}
+
+@mixin placeholder($color, $color2: "") {&::-webkit-input-placeholder {@include transition(.5s all);color: $color} &:-moz-placeholder {@include transition(.5s all);color: $color} &::-moz-placeholder {@include transition(.5s all);color: $color} &:-ms-input-placeholder {@include transition(.5s all);color: $color}
+	@if $color2 != "" {&:focus::-webkit-input-placeholder {color: $color2} &:focus:-moz-placeholder {color: $color2} &:focus::-moz-placeholder {color: $color2} &:focus:-ms-input-placeholder {color: $color2}}}
+
+@mixin selection($color) {::selection {background: $color}::-moz-selection {background: $color}}
+
+@mixin serif {font-family: $serif}
+@mixin sans-serif {font-family: $sans-serif}
+@mixin futura {font-family: $futura}
+@mixin crimson {font-family: $crimson}
+
+@mixin clearfix {&::after {content: ".";display: block;height: 0;clear: both;visibility: hidden}}
+
+@mixin borderbox {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box}
+
+@mixin backgroundcover($image) {-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{$image}, sizingMethod='scale');-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$image}', sizingMethod='scale')"}
+
+@mixin gradient ($color1, $color2) {
+	background-color: $color1; background:-webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to($color2));  background: -webkit-linear-gradient(top, $color1, $color2);background: -moz-linear-gradient(top, $color1, $color2);background: -ms-linear-gradient(top, $color1, $color2);background: -o-linear-gradient(top, $color1, $color2); background-repeat: no-repeat;}
+
+@mixin column-count($values){-webkit-column-count: $values;-moz-column-count: $values;-o-column-count: $values;column-count: $values}
+@mixin column-gap($values){-webkit-column-gap: $values;-moz-column-gap: $values;-o-column-gap: $values;column-gap: $values}
+
+//@mixin borderimage {@include box-shadow(3px 3px 5px #CCC);margin-bottom: 10px;border: 9px solid #313131; @include border-image('img/BORDER-IMAGE.png', 27)}
+
+//cr mixins 
+@mixin fieldgroup {border:1px solid #ccc; padding:20px; @include round(7px);} 
+@mixin fg-inner {background:$light-pink; text-align:left; padding:7px 15px; border-bottom:1px solid #ccc; margin:-20px -20px 20px -20px; @include round-top(7px);}

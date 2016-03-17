@@ -1,0 +1,99 @@
+body {min-width: $screen-sm;-webkit-font-smoothing: antialiased;
+	@media screen and (min-width: 0px) {& {min-width: 0;overflow-x: hidden}}} //IE8 Fix.
+
+// Selection settings
+@include selection(#32dcda);
+
+// Elements
+@mixin h1 {}
+@mixin h2 {}
+@mixin h3 {}
+@mixin h4 {}
+@mixin h5 {}
+@mixin h6 {}
+
+h1, h2, h3, h4, h5, h6 {}
+h1 {@include h1}
+h2 {@include h2}
+h3 {@include h3}
+h4 {@include h4}
+h5 {@include h5}
+h6 {@include h6}
+
+p, pre, blockquote, ul, ol, table, fieldset {}
+p, pre, ul, ol, dl {}
+
+p {max-width: 600px}
+pre {}
+ol, ul {}
+
+ol {
+	li { 
+		li { }}}
+ul {
+	li {
+		li {}}}
+
+img {max-width: 100%;height: auto;width: auto}
+svg {max-width: 100%;max-height: 100%;display: none;
+	&.svg {display: inline}}
+
+a {
+	&, &:link, &:visited {}
+	&:hover, &:focus, &:active {outline: none}
+	&:hover {}
+	&:focus {}
+	&:active {}}
+
+em, em a, i, var, samp, cite, cite a {}
+
+strong, b {}
+
+// Buttons
+	// States
+	@mixin button {background: {position: 0 top;repeat: repeat-x} padding: 0;text: {decoration: none;align: center} white-space: nowrap}
+	@mixin button-hover {background-position: center}
+	@mixin button-click {background-position: 0 bottom}
+	
+	// Repeated styles
+	@mixin engraved {text-shadow: rgba(0, 0, 0, .5) 0 -1px 1px}
+	@mixin color-button {color: $white}
+	@mixin button-disabled {cursor: default}
+
+	// Sizes
+	@mixin small-button {@include round(4px);font-size: 10px;line-height: 26px}
+	@mixin medium-button {@include round(5px);font-size: 14px;line-height: 33px;padding: 0 20px}
+	@mixin large-button {@include round(6px);font-size: 16px;line-height: 50px}
+
+	// Colors
+	@mixin gray-button {color: #222;border: 1px solid gray;background-image: url('img/buttons/gray.png')}
+	@mixin gray-button-hover {@include box-shadow(rgba(0, 0, 0, .2) 1px 1px 2px inset);color: #ddd;border-color: #999}
+	@mixin gray-button-disabled {@include box-shadow(none);color: #c1bfbf;border-color: #afafaf}
+
+a {
+	&.button {@include button;
+		&:hover {@include button-hover}
+		&:active {@include button-click;outline: none}	
+		&, &:hover, &:active {@include transition(1s)}}
+	&.small {@include small-button}
+	&.medium {@include medium-button}
+	&.large {@include large-button}
+	&.disabled {@include button-disabled}
+	&.gray {@include gray-button;
+		&:hover {@include gray-button-hover}
+		&.disabled {@include gray-button-disabled}}}
+
+// Button syntax: <a class="small gray button disabled">This is a button</a>
+
+// Inputs
+@mixin generic-input {}
+
+form {max-width: 600px}
+.form-required {display: none}
+
+button, input[type="reset"], input[type="submit"], input[type="button"] {
+	&:hover {}
+	&:focus {outline: none !important}
+	&:active {}}
+.form-item {input, textarea, select {&.error { }}}
+

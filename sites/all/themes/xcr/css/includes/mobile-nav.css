@@ -1,0 +1,77 @@
+/*
+Syntax error: Undefined variable: "$screen-sm".
+        on line 8 of c:/Users/Ben/work/Websites/Carers Website/html/sites/all/themes/cr/css/sass/includes/mobile-nav.scss
+
+3: //Bootstrap Settings: Currently Disabling the Default Bootstrap Mobile Menu Icon
+4: .navbar-toggle {display: none}
+5: 
+6: // Nav icon
+7: #block-block-2 {position: absolute;right: 15px;z-index: 401;top: 6px;display: none;
+8: 	@media screen and (max-width: $screen-sm) {& {display: block}}
+9: 	//@media screen and (max-width: $screen-sm), screen and (max-height: 350px) {& {top: 24px}}
+10: 		@media screen and (max-width: 480px), screen and (max-height: 700px) {top: 10px}
+11: 	
+12: 		#nav-icon {display: block;position: relative;padding: 8px;padding-right: 0;
+13: 			.inner {position: relative;display: inline-block;width: $barWidth;height: 23px}
+
+Backtrace:
+c:/Users/Ben/work/Websites/Carers Website/html/sites/all/themes/cr/css/sass/includes/mobile-nav.scss:8
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/script/tree/variable.rb:49:in `_perform'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/script/tree/node.rb:50:in `perform'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:503:in `block in run_interp_no_strip'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:501:in `map'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:501:in `run_interp_no_strip'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:511:in `run_interp'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:476:in `visit_media'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:152:in `block in visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/stack.rb:79:in `block in with_base'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/stack.rb:121:in `with_frame'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/stack.rb:79:in `with_base'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:152:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:389:in `block (2 levels) in visit_rule'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:389:in `map'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:389:in `block in visit_rule'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:173:in `with_environment'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:387:in `visit_rule'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:152:in `block in visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/stack.rb:79:in `block in with_base'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/stack.rb:121:in `with_frame'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/stack.rb:79:in `with_base'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:152:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:52:in `map'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:161:in `block in visit_children'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:173:in `with_environment'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:160:in `visit_children'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:180:in `visit_root'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:151:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/visitors/perform.rb:8:in `visit'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/root_node.rb:36:in `css_tree'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/engine.rb:371:in `_render_with_sourcemap'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/engine.rb:291:in `render_with_sourcemap'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:482:in `update_stylesheet'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:214:in `block in update_stylesheets'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:208:in `each'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:208:in `update_stylesheets'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/lib/compass/sass_compiler.rb:40:in `compile!'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/lib/compass/commands/update_project.rb:49:in `perform'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/lib/compass/commands/base.rb:18:in `execute'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/lib/compass/commands/project_base.rb:19:in `execute'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/lib/compass/exec/sub_command_ui.rb:15:in `run!'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/bin/compass:30:in `block in <top (required)>'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/bin/compass:44:in `call'
+c:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-1.0.1/bin/compass:44:in `<top (required)>'
+c:/Ruby193/bin/compass:23:in `load'
+c:/Ruby193/bin/compass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$screen-sm\".\A         on line 8 of c:/Users/Ben/work/Websites/Carers Website/html/sites/all/themes/cr/css/sass/includes/mobile-nav.scss\A \A 3: //Bootstrap Settings: Currently Disabling the Default Bootstrap Mobile Menu Icon\A 4: .navbar-toggle {display: none}\A 5: \A 6: // Nav icon\A 7: #block-block-2 {position: absolute;right: 15px;z-index: 401;top: 6px;display: none;\A 8: 	@media screen and (max-width: $screen-sm) {& {display: block}}\A 9: 	//@media screen and (max-width: $screen-sm), screen and (max-height: 350px) {& {top: 24px}}\A 10: 		@media screen and (max-width: 480px), screen and (max-height: 700px) {top: 10px}\A 11: 	\A 12: 		#nav-icon {display: block;position: relative;padding: 8px;padding-right: 0;\A 13: 			.inner {position: relative;display: inline-block;width: $barWidth;height: 23px}"; }

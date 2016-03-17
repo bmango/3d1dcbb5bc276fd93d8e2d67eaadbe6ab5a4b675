@@ -1,0 +1,4 @@
+name = Carers Register Custom Module
+description = Various functions.
+core = 7.x
+

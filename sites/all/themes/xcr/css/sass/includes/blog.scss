@@ -1,0 +1,32 @@
+.page-blog {
+	#block-system-main {
+		.views-row {margin-bottom: 50px;
+			.thumbnail {float: left;width: 38%;
+				@media screen and (max-width: 479px) {& {width: 100%;float: none;margin-bottom: 10px}}}
+			.information {float: left;margin-left: 2%;width: 58%;
+				@media screen and (max-width: 479px) {& {float: none;margin-left: 0;width: 100%}}
+				.blog-headline {font-size: 116.66667%}
+				.details {font-style: italic;color: #888;font-size: 78.57%;margin-bottom: 5px}
+				.summary {margin-bottom: 0;
+					a {}}}}
+		.views-row-last {margin-bottom: 0}}}
+#block-sharethis-sharethis-block {
+	.stLarge {@include round(5px);background-color: $social-icon-background;width: 48px;height: 48px;background-repeat: no-repeat;
+		&, &:hover {background-position: 50% 50%}}
+	.st_twitter_large .stLarge {background-image: url('img/twitter.png') !important;@include highdpiimportant('twitter.png', 41px 34px)}
+	.st_facebook_large .stLarge {background-image: url('img/facebook.png') !important;@include highdpiimportant('facebook.png', 22px 40px)}
+	.st_googleplus_large .stLarge {background-image: url('img/google.png') !important;@include highdpiimportant('google.png', 40px 38px)}}
+
+.node-type-blog {
+	#block-system-main {
+		.submitted {font-size: 18px}
+		.field-name-field-blog-thumbnail {margin-bottom: 10px;
+			img {display: block;margin: 0 auto}}}}
+	#block-views-blog-related {
+		.views-row {width: 100%;margin: 0 0 20px;
+			@media screen and (max-width: 900px) {& {float: left;width: 48%;margin-right: 4%}}
+			@media screen and (max-width: 500px) {& {float: none;width: 100%;margin-right: 0}}
+			.thumbnail {margin-bottom: 5px}
+			.blog-headline {margin-bottom: 0}}
+		.views-row-even {@media screen and (max-width: 900px) {& {margin-right: 0}}}
+		.views-row-last {margin-bottom: 0}}

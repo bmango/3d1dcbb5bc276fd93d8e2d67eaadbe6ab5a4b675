@@ -1,0 +1,26 @@
+diff --git a/handlers/views_handler_relationship_groupwise_max.inc b/handlers/views_handler_relationship_groupwise_max.inc
+index 23198c6..e87d0eb 100644
+--- a/handlers/views_handler_relationship_groupwise_max.inc
++++ b/handlers/views_handler_relationship_groupwise_max.inc
+@@ -288,8 +288,20 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
+     // We have to work directly with the SQL, because putting a name of a field
+     // into a SelectQuery that it does not recognize (because it's outer) just
+     // makes it treat it as a string.
++    // As per https://www.drupal.org/node/2295379, using this handler on a view
++    // with a base table that isn't the one defined in the outer field causes
++    // SQL errors since the base table is hard-coded in the handler data. So
++    // we replace the outer field base table with the relationship. We use the
++    // argument table since it will always match the outer field's table.
++    if ($this->relationship) {
++      $outer_field = str_replace($this->definition['argument table'], $this->relationship, $this->definition['outer field']);
++    }
++    else {
++      // Just use the default outer field.
++      $outer_field = $this->definition['outer field'];
++    }
+     $outer_placeholder = ':' . str_replace('.', '_', $this->definition['outer field']);
+-    $subquery_sql = str_replace($outer_placeholder, $this->definition['outer field'], $subquery_sql);
++    $subquery_sql = str_replace($outer_placeholder, $outer_field, $subquery_sql);
+ 
+     return $subquery_sql;
+   }

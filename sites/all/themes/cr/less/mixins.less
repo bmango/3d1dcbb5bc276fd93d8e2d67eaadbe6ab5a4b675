@@ -1,0 +1,94 @@
+//cr mixins 
+.fieldgroup {
+	border:1px solid #ccc; 
+	padding:20px; 
+	border-radius:7px;
+} 
+
+.fg-inner {
+	background:@light-pink; 
+	text-align:left; 
+	padding:12px 15px; 
+	border-bottom:1px solid #ccc; 
+	margin:-20px -20px 20px -20px; 
+	border-top-right-radius:7px;
+	border-top-left-radius:7px;	
+	font-weight:bold;
+}
+	
+.checkbox-style {
+	label {
+		display:inline-block;
+		float:none;
+		margin:0 0 3px 0;
+		font-weight:normal;
+		padding:0;
+		width:auto;
+	}
+	> label {
+		margin:0 15px 10px 0;
+		float:left;
+		clear:left;
+		font-weight:bold;
+		width:130px;
+	}		
+}
+
+.flag-style {
+	float:right;
+	margin:-30px 20px 0 0;
+	width:40px;
+	height:40px;
+
+	a {
+		display:block;
+		width:40px;
+		height:40px;
+		text-indent:-9999px;
+		transition:all 0.3s ease-in-out;
+		
+		&.flag-action {
+			background:url('../images/favourite.png') no-repeat;
+		}
+	
+		&.unflag-action {
+			background:url('../images/favourite-1.png') no-repeat;
+		}
+	}
+}
+
+.field-style {
+	margin:0.2em 0 1.2em;
+	clear:left;
+	
+	.field-label {
+		width:150px;
+		float:left;
+		margin:0 0 1em;
+	}
+	
+	> .field-items {
+		margin:0 0  1em 160px;
+	}
+}
+
+.field-style-1 {
+	.field-label {
+		width:200px;
+		float:left;
+		margin:0 0 1em;
+	}
+	
+	> .field-items {
+		margin:0 0  1em 220px;
+	}
+}
+
+.menu-highlight {
+	background:#aaa;
+	border:1px solid #999;
+	
+	&:hover {
+		background: darken(#bbb, 10%);
+	}
+}

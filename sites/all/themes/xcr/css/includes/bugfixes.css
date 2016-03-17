@@ -1,0 +1,36 @@
+body.admin-menu {
+  margin-top: 29px !important;
+}
+
+#admin-menu {
+  backface-visibility: hidden;
+}
+#admin-menu ul {
+  max-width: none;
+}
+#admin-menu ul li {
+  margin-bottom: 0;
+}
+#admin-menu .toolbar-shortcuts {
+  width: 95px;
+  height: 28px;
+}
+#admin-menu .toolbar-shortcuts .menu {
+  height: auto !important;
+}
+#admin-menu #admin-menu-account {
+  float: right;
+}
+#admin-menu #admin-menu-account li {
+  float: none;
+  display: inline-block;
+}
+#admin-menu #admin-menu-account li.admin-menu-account {
+  float: left;
+}
+
+#overlay {
+  backface-visibility: hidden;
+}
+
+/*# sourceMappingURL=bugfixes.css.map */

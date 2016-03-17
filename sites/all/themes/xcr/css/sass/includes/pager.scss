@@ -1,0 +1,43 @@
+// Pager Button Background Colors
+$pager-current: #333;
+$pager-normal: #b0aca8;
+$pager-hover: #ccc;
+
+// Pager Button Font Colors
+$pager-font-normal:#444;
+$pager-font-current: $white;
+
+// Pager Text Colors
+$pager-text-normal:#777;
+$pager-text-hover:#333;
+
+#block-system-main {
+	.item-list {border-top: 1px solid #ccc;padding: 15px 0 0;margin: 50px 0 0;
+		@media screen and (max-width: 900px) {& {margin: 50px 0}}
+		.pager {position: relative;margin: 0;border: none;background: none;padding: 0;font-size: 10px;text-align: left;
+			ul, li {float: left;margin: 0;padding: 0}
+			li {margin: 0 5px;border: none;line-height: 24px;
+				a, span {padding: 4px 8px}
+				span span {padding: 0}
+				a {cursor: pointer;background: none;color: $pager-font-normal}
+				&.pager-current {background: none;
+					&.first {margin-left: 0}
+					span {outline: 0;background: $pager-current;font-weight: bold;color: $pager-font-current;
+						&:hover {background: $pager-current}}}
+				&.pager-first, &.pager-previous, &.pager-next, &.pager-last, &.pager-ellipsis {@include round(0);background: none;padding: 0;
+					&:hover {@include round(0);background: none;
+						a {color: $pager-text-hover}}
+				 	a {width: auto;padding: 0;text-align: center;color: $pager-text-normal;line-height: 18px}}
+				&.pager-previous, &.pager-next, &.pager-last, &.pager-first, &.pager-last {
+					a {width: 40px;background: none !important}
+					&:hover a {color: $pager-text-hover}}
+				&.pager-next {position: absolute;top: 0;right: 35px}
+				&.pager-last, &.pager-next.last {position: absolute;top: 0;right: 0;
+					a {width: 30px;text-align: right}}
+				&.pager-first {margin-left: 0;padding-left: 0;
+					a {width: 30px;text-align: left}}
+				&.pager-last {margin-right: 0;padding-right: 0}
+				&.pager-ellipsis {display: none}
+				&:hover a {background: $pager-hover;
+					a {color: $pager-text-hover}}}
+			.pager-item a, .pager-current span {@include round(50%);outline: 0;background: $pager-normal;font: bold 12px/1.2 Arial, sans-serif}}}}

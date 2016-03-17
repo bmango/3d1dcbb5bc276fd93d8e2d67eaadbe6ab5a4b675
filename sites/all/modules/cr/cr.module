@@ -1,0 +1,336 @@
+<?php 
+
+/**
+ * Implements template_preprocess_entity().
+ *
+ * Runs a entity specific preprocess function, if it exists.
+ */
+
+function cr_preprocess_entity(&$variables, $hook) {
+  $function = __FUNCTION__ . '_' . $variables['entity_type'];
+  if (function_exists($function)) {
+    $function($variables, $hook);
+  }
+}
+
+
+//custom function returning profile name
+function cr_profile($cr_uid) {
+	$profile = profile2_by_uid_load($cr_uid, 'carer');
+	$profile_name = '';
+	if($profile) {
+		return $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
+	} else {
+		$profile = profile2_by_uid_load($cr_uid, 'carer_employer');
+		if($profile) {
+			return $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
+		} else {
+			return false;
+		}
+	}
+}
+
+function cr_form_comment_form_alter(&$form, &$form_state) {
+    //unset($form['author']['name']);
+}
+
+
+/**
+ * Profile2 specific implementation of template_preprocess_entity().
+ */
+ /*
+function cr_preprocess_entity_profile2(&$variables, $hook) {
+  $function = __FUNCTION__ . '_' . $variables['entity_type'];
+  if (function_exists($function)) {
+    $function($variables, $hook);
+  }
+
+	dpm($variables);
+}
+*/
+
+function cr_preprocess_profile2(&$variables)  {
+	//dpm($variables);
+	//print 'hello';
+}
+
+
+/**
+ * @param $items
+ */
+function cr_menu_alter(&$items) {
+	$items['cart']['access callback'] = 'user_is_logged_in';
+}
+
+
+function cr_node_presave($node) {
+	
+	if ($node->type == 'job') :
+		
+		$pc = $node->field_address['und'][0]['postal_code'];
+		
+		//$request = drupal_http_request('http://api.postcodes.io/outcodes/' . $pc1);
+		$request = drupal_http_request('http://api.postcodes.io/postcodes/' . $pc);
+		$data = drupal_json_decode($request->data);
+		
+		if(isset($data['result'])) {
+			$result = $data['result'];
+			$district = $result['admin_district'];
+		} else {
+			$district = 'Not known';
+			drupal_set_message(t('The post code you entered was not valid'), 'error');
+		}
+		
+		$node->field_district['und'][0]['value'] = $district;
+		
+	endif;
+}
+
+//Set value of hidden district field from postcode lookup api
+function cr_profile2_presave($profile) {
+	
+	if ($profile->type == 'carer') :
+		
+		$pc = $profile->field_address['und'][0]['postal_code'];
+		
+		//$request = drupal_http_request('http://api.postcodes.io/outcodes/' . $pc1);
+		$request = drupal_http_request('http://api.postcodes.io/postcodes/' . $pc);
+		$data = drupal_json_decode($request->data);
+		
+		if(isset($data['result'])) {
+			$result = $data['result'];
+			$district = $result['admin_district'];
+		} else {
+			$district = 'Not known';
+			drupal_set_message(t('The post code you entered was not valid'), 'error');
+		}
+		
+		$profile->field_district['und'][0]['value'] = $district;
+		
+		$profile->field_surname_initial['und'][0]['value'] = substr($profile->field_last_name_em['und'][0]['value'],0,1);
+		//dpm($data);
+		//dpm($profile);
+		
+/*		
+		if (strlen($pc) > 3) :
+			if (strpos($pc, ' ') !== false) :
+				$pc1 = stristr($pc, ' ', true);
+			else : 
+				$pc1 = substr($pc, 0, 4);
+			endif;
+
+			//start			
+			$url = 'http://example.com';
+			$data = array(
+			'key1' => $value1,
+			'key2' => $value2,
+			);
+			
+			$full_url = url($url, array('query' => $data));
+			drupal_http_request($full_url);
+			*/
+		//$lat = $result['latitude'];
+		//end	
+			//$profile->field_general_location['und'][0]['value'] = $pc1;
+		//endif;
+		
+	elseif ($profile->type == 'carer_employer'):
+		$profile->field_surname_initial['und'][0]['value'] = substr($profile->field_last_name_em['und'][0]['value'],0,1);
+		
+	endif;
+}
+
+function cr_entity_view_mode_alter(&$view_mode, $context) {
+
+global $user;
+//dpm($context);
+/*
+dpm($user);
+
+if (in_array('carer employer active', $user->roles)) {
+	print 'yes';
+} else {
+	print 'no';
+}
+*/
+
+//print_r(user_roles());
+
+  if ($context['entity_type'] == 'profile2'){
+	  if (in_array('carer employer active', $user->roles)) {
+    		$view_mode = 'carer_details_employer';
+			//$context['entity']->label = 'hi <i class="fa fa-user"></i> ' . $context['entity']->field_first_name_em['und'][0]['value'] . ' ' . $context['entity']->field_last_name_em['und'][0]['value'];
+			$context['entity']->label = 'Carer Details for ' . $context['entity']->field_first_name_em['und'][0]['value'] . ' ' . $context['entity']->field_last_name_em['und'][0]['value'];
+	  }
+  }
+  if ($context['entity_type'] == 'node' && $context['entity']->type == 'job'){
+	  if (in_array('carer', $user->roles)) {
+    		$view_mode = 'job_details_carer';
+			//$context['entity']->label = '<i class="fa fa-user"></i> ' . $context['entity']->field_first_name_em['und'][0]['value'] . ' ' . $context['entity']->field_last_name_em['und'][0]['value'];
+	  }
+  }
+}
+
+/*
+function cr_form_alter(&$form, $form_state, $form_id) {
+  if($form_id == 'user_register_form')
+  //dpm($form);
+  {
+    //$form['account']['mail']['#description'] = t('My description');
+	 //$form['account']['#weight'] = -20;
+  }
+}
+*/
+
+
+
+/**
+ * Theme function override for multiple-value form widgets.
+ *
+ * @see theme_field_multiple_value_form()
+ */
+function cr_theme_field_multiple_value_form($variables) {
+  $element = $variables['element'];
+  $output = '';
+ 
+  // The first condition is the override.
+  if (($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED) && isset($element[0]['#nodrag'])) {
+    $table_id = drupal_html_id($element['#field_name'] . '_values');
+    $required = !empty($element['#required']) ? theme('form_required_marker', $variables) : '';
+ 
+    $header = array(
+      array(
+        'data' => '<label>' . t('!title !required', array('!title' => $element['#title'], '!required' => $required)) . "</label>",
+        'class' => array('field-label'),
+      ),
+    );
+    $rows = array();
+ 
+    // Sort items according to weight
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key === 'add_more') {
+        $add_more_button = &$element[$key];
+      }
+      else {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_field_sort_items_value_helper');
+ 
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      // We don't want the weight to render.
+      unset($item['_weight']);
+      $cells = array(
+        drupal_render($item),
+      );
+      $rows[] = array(
+        'data' => $cells,
+      );
+    }
+ 
+    $output = '<div class="form-item">';
+    $output .= theme('table', array(
+      'header' => $header,
+      'rows' => $rows,
+      'attributes' => array(
+        'id' => $table_id,
+        'class' => array('field-multiple-table'),
+      ),
+    ));
+    $output .= $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '';
+    $output .= '<div class="clearfix">' . drupal_render($add_more_button) . '</div>';
+    $output .= '</div>';
+  }
+  elseif ($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED) {
+		//dpm($element);
+    $table_id = drupal_html_id($element['#field_name'] . '_values');
+    $order_class = $element['#field_name'] . '-delta-order';
+    $required = !empty($element['#required']) ? theme('form_required_marker', $variables) : '';
+ 
+    $header = array(
+      array(
+        'data' => '<label>' . t('!title !required', array('!title' => $element['#title'], '!required' => $required)) . "</label>",
+        'colspan' => 2,
+        'class' => array('field-label'),
+      ),
+      t('Order'),
+    );
+    $rows = array();
+ 
+    // Sort items according to '_weight' (needed when the form comes back after
+    // preview or failed validation).
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key === 'add_more') {
+        $add_more_button = &$element[$key];
+      }
+      else {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_field_sort_items_value_helper');
+ 
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      $item['_weight']['#attributes']['class'] = array($order_class);
+      $delta_element = drupal_render($item['_weight']);
+      $cells = array(
+        array(
+          'data' => '',
+          'class' => array('field-multiple-drag'),
+        ),
+        drupal_render($item),
+        array(
+          'data' => $delta_element,
+          'class' => array('delta-order'),
+        ),
+      );
+      $rows[] = array(
+        'data' => $cells,
+        'class' => array('draggable'),
+      );
+    }
+ 
+    $output = '<div class="form-item">';
+    $output .= theme('table', array(
+      'header' => $header,
+      'rows' => $rows,
+      'attributes' => array(
+        'id' => $table_id,
+        'class' => array('field-multiple-table'),
+      ),
+    ));
+    $output .= $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '';
+    $output .= '<div class="clearfix">' . drupal_render($add_more_button) . '</div>';
+    $output .= '</div>';
+ 
+    drupal_add_tabledrag($table_id, 'order', 'sibling', $order_class);
+  }
+  else {
+    foreach (element_children($element) as $key) {
+      $output .= drupal_render($element[$key]);
+    }
+  }
+ 
+  return $output;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function cr_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name'])) {
+    switch ($element['#field_name']) {
+      case 'field_qualifications':
+        $element['#nodrag'] = TRUE;
+      default:
+        break;
+      //case 'field_qualifications':
+      //  $element['#nodrag'] = TRUE;
+      //default:
+      //  break;
+    }
+  }
+}
