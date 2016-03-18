@@ -8142,12 +8142,15 @@ ul.tabs--primary {
   overflow: hidden;
 }
 .carer-list .views-row .group-top-bar .views-field-nothing-1,
-.carer-list .views-row .group-top-bar .views-field-path {
+.carer-list .views-row .group-top-bar .views-field-path,
+.carer-list .views-row .group-top-bar .views-field-nothing-2 {
   float: right;
   clear: none;
+  margin: 0 0 0 15px;
 }
 .carer-list .views-row .group-top-bar .views-field-nothing-1 span,
-.carer-list .views-row .group-top-bar .views-field-path span {
+.carer-list .views-row .group-top-bar .views-field-path span,
+.carer-list .views-row .group-top-bar .views-field-nothing-2 span {
   text-align: right;
 }
 .carer-list .views-row .group-top-bar .views-field-ops {
