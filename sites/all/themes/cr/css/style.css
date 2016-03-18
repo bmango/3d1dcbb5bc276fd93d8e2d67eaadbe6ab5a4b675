@@ -8479,6 +8479,13 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
   background: #f1f1f1;
   padding: 15px;
   margin: 7px 0 0;
+  border-radius: 6px;
+}
+.node-message.view-mode-full .group-message .field-name-field-attachment {
+  margin: 15px 0 0;
+}
+.node-message.view-mode-full .group-message .field-name-field-attachment .field-item {
+  margin: 4px 0 8px;
 }
 .node-message.view-mode-full #comments {
   margin: 50px 0;
@@ -8488,6 +8495,7 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
   background: #f1f1f1;
   padding: 15px;
   margin: 7px 0 9px;
+  border-radius: 6px;
 }
 .node-message.view-mode-full #comments .field-name-sent {
   margin-bottom: 20px;
@@ -8498,6 +8506,9 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
 }
 .node-message.view-mode-full #comment-form .form-item-comment-body-und-0-value .control-label {
   display: none;
+}
+.node-message.view-mode-full #comment-form .field-type-file {
+  margin: 0 0 20px;
 }
 .node-message.view-mode-full #edit-author--2 {
   display: none;

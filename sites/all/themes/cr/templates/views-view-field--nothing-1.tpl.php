@@ -40,7 +40,7 @@ foreach (module_list(FALSE, FALSE, TRUE) as $module) {
 }
 
 
- 
+ //only allow employers to view profile if they are active
  if(user_access('access user profiles')) :
 ?>
 <?php print $output; ?>
