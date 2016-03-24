@@ -8,3 +8,5 @@ sites/*/node_modules
 sites/all/themes/cr/node_modules
 node_modules
 _notes
+dwsync.xml
+*dwsync.xml

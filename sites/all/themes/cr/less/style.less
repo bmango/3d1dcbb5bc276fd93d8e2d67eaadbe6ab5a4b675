@@ -394,11 +394,33 @@ nav > ul.menu:first-child {
 	margin:1.5em 0;
 }
 
-.node-type-job .field {
-	.field-style;
-
-	&.field-name-carer-favourite-links .field-items {
-		margin-left:0;
+.node-type-job {
+	.view-mode-job_details_carer {
+		.group-job {
+			clear:both;
+		}
+		
+		.field-name-carer-favourite-links {
+			float:left;
+			
+		}
+		
+		.field-name-send-message {
+			float:left;
+			margin:3px 0 0 10px;
+			clear:none;
+			.field-items {
+				margin:0;
+			}
+		}
+	}
+	
+	.field {
+		.field-style;
+	
+		&.field-name-carer-favourite-links .field-items {
+			margin-left:0;
+		}
 	}
 }
 

@@ -18,7 +18,7 @@ function cr_preprocess_entity(&$variables, $hook) {
 function cr_profile($cr_uid) {
 	$profile = profile2_by_uid_load($cr_uid, 'carer');
 	$profile_name = '';
-	if($profile) {
+	if($profile->pid) {
 		return $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
 	} else {
 		$profile = profile2_by_uid_load($cr_uid, 'carer_employer');

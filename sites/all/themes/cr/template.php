@@ -92,19 +92,21 @@ function cr_form_alter(&$form, $form_state, $form_id) {
 
 function cr_checkbox($variables) {
   $element = $variables ['element'];
-  $element ['#attributes']['type'] = 'checkbox';
+  $element['#attributes']['type'] = 'checkbox';
   element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
   
   // Unchecked checkbox has #value of integer 0.
   if (!empty($element ['#checked'])) {
-    $element ['#attributes']['checked'] = 'checked';
+    $element['#attributes']['checked'] = 'checked';
   }
-  
-  if ($element['#attributes']['id'] == 'edit-profile-carer-field-profile-active-und') {
-      $element['#attributes']['data-toggle'] = 'toggle';
-		$element['#attributes']['data-on'] = 'Active';
-		$element['#attributes']['data-off'] = 'Unactive';
-		$element['#attributes']['data-onstyle'] = 'success';
+    
+  if(isset($element['#attributes']['id'])) {
+	  if ($element['#attributes']['id'] == 'edit-profile-carer-field-profile-active-und') {
+			$element['#attributes']['data-toggle'] = 'toggle';
+			$element['#attributes']['data-on'] = 'Active';
+			$element['#attributes']['data-off'] = 'Unactive';
+			$element['#attributes']['data-onstyle'] = 'success';
+	  }
   }
   
   _form_set_class($element, array('form-checkbox'));

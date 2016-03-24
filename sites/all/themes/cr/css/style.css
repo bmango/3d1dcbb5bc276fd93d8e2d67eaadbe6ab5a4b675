@@ -7909,6 +7909,20 @@ nav > ul.menu:first-child li ul li a {
   font-size: 14px;
   margin: 1.5em 0;
 }
+.node-type-job .view-mode-job_details_carer .group-job {
+  clear: both;
+}
+.node-type-job .view-mode-job_details_carer .field-name-carer-favourite-links {
+  float: left;
+}
+.node-type-job .view-mode-job_details_carer .field-name-send-message {
+  float: left;
+  margin: 3px 0 0 10px;
+  clear: none;
+}
+.node-type-job .view-mode-job_details_carer .field-name-send-message .field-items {
+  margin: 0;
+}
 .node-type-job .field {
   margin: 0.2em 0 1.2em;
   clear: left;
