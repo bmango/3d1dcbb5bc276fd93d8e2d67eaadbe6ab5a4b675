@@ -8401,8 +8401,21 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
 #user-register-form #edit-profile-carer-field-profile-active {
   display: none;
 }
+.view-mode-carer_details_employer .field-name-employer-carers-links {
+  float: left;
+}
 .view-mode-carer_details_employer .field-name-employer-carers-links .field-items {
   margin: 15px 0;
+}
+.view-mode-carer_details_employer .field-name-send-message {
+  float: left;
+  margin-left: 6px;
+}
+.view-mode-carer_details_employer .field-name-send-message .field-items {
+  margin: 15px 0;
+}
+.view-mode-carer_details_employer fieldset {
+  clear: both;
 }
 .view-mode-carer_details_employer .group-top-bar {
   margin: -15px -15px 15px;

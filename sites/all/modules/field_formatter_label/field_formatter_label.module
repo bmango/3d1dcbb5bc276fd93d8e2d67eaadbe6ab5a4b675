@@ -72,8 +72,11 @@ function field_formatter_label_preprocess_field(&$variables) {
   $view_mode = $variables['element']['#view_mode'];
   $field = field_info_instance($variables['element']['#entity_type'], $variables['element']['#field_name'], $variables['element']['#bundle']);
   $settings = isset($field['display'][$view_mode]['settings']) ? $field['display'][$view_mode]['settings'] : $field['display']['default']['settings'];
-  if ($variables['element']['#label_display'] != 'hidden' &&
-    strlen(trim($settings['field_formatter_label'])) > 0) {
-    $variables['label'] = t(check_plain($settings['field_formatter_label']));
+  if($settings) {
+  //if(array_key_exists('field_formatter_label', $settings)) {
+	  if ($variables['element']['#label_display'] != 'hidden' &&
+		 strlen(trim($settings['field_formatter_label'])) > 0) {
+		 $variables['label'] = t(check_plain($settings['field_formatter_label']));
+	  }
   }
 }

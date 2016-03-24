@@ -155,12 +155,24 @@ function cr_preprocess_page(&$vars) {
 		drupal_set_title(t($profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_last_name_em['und'][0]['value']));
 	//elseif(arg(0)=='node' && is_numeric(arg(1))) :
 	//elseif($vars['node']->type=='message') :
+	elseif(arg(0)=='node' && arg(1)=='add' && arg(2)=='message') :
+		if (isset($_GET['field_to'])) :
+		 	$cr_uid = $_GET['field_to'];
+			$to = cr_profile($cr_uid);
+			drupal_set_title('Send message to ' . $to);
+		endif;
+	
 	elseif(arg(0)=='node') :
-		if($vars['node']->type=='message') :
-			$profile = profile2_by_uid_load($vars['node']->uid, 'carer_employer');
-			//dpm($profile);
-			//drupal_set_title(t($profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_last_name_em['und'][0]['value']));
-			$vars['title'] = "Message from " . $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
+		$menu_object = menu_get_object();
+	  if (isset($menu_object->type)) :
+		 if ('message' == $menu_object->type) :
+		 
+		//if($vars['node']->type=='message' && !(empty($node->nid))) :
+				$profile = profile2_by_uid_load($vars['node']->uid, 'carer_employer');
+				//dpm($profile);
+				$vars['title'] = "Message from " . $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
+				//$vars['title'] = "Message from " . cr_profile($vars['node']->uid);
+			endif;
 		endif;
 	endif;
 	//dpm($vars['node']);
