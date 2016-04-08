@@ -313,8 +313,8 @@ nav > ul.menu:first-child {
 		clear:left;
 	}
 		
-	&.field-name-carer-profile-active .field-items {
-		margin:0 0 1em;
+	&.field-name-carer-profile-active .field-items, &.field-name-carer-membership-active .field-items {
+		margin:0 0 1em; 
 		
 		.cr-active {
 			border:1px solid #bbb;
@@ -817,8 +817,9 @@ ul.tabs--primary {
 
 .node-message {
 	&.view-mode-full {
+		
 		.group-message {
-			.field:nth-child(-n+2) {
+			.field-name-from, .field-name-profile-name {
 				.field-style;
 				margin-bottom:0.3em;
 				
@@ -833,7 +834,17 @@ ul.tabs--primary {
 				}
 			}
 			
+			.field-name-profile-name.field {
+				margin-bottom:11px;
+			}
+      
+      .employer-job {
+        float:right;
+      }
+			
 			.field-name-field-description {
+        clear:left;
+        
 				.field-items {
 					border:1px solid #ccc;
 					background:@light-grey;
@@ -850,6 +861,10 @@ ul.tabs--primary {
 					margin:4px 0 8px;
 				}
 			}
+		}
+		
+		.tabledrag-toggle-weight-wrapper {
+			display:none;
 		}
 		
 		#comments {

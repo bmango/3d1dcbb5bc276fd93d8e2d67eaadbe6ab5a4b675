@@ -23,37 +23,13 @@ function cr_profile($cr_uid) {
 	} else {
 		$profile = profile2_by_uid_load($cr_uid, 'carer_employer');
 		if($profile) {
+			//dpm($profile);
 			return $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
 		} else {
 			return false;
 		}
 	}
 }
-
-function cr_form_comment_form_alter(&$form, &$form_state) {
-    //unset($form['author']['name']);
-}
-
-
-/**
- * Profile2 specific implementation of template_preprocess_entity().
- */
- /*
-function cr_preprocess_entity_profile2(&$variables, $hook) {
-  $function = __FUNCTION__ . '_' . $variables['entity_type'];
-  if (function_exists($function)) {
-    $function($variables, $hook);
-  }
-
-	dpm($variables);
-}
-*/
-
-function cr_preprocess_profile2(&$variables)  {
-	//dpm($variables);
-	//print 'hello';
-}
-
 
 /**
  * @param $items
@@ -136,25 +112,12 @@ function cr_profile2_presave($profile) {
 		
 	elseif ($profile->type == 'carer_employer'):
 		$profile->field_surname_initial['und'][0]['value'] = substr($profile->field_last_name_em['und'][0]['value'],0,1);
-		
 	endif;
 }
 
 function cr_entity_view_mode_alter(&$view_mode, $context) {
-
-global $user;
-//dpm($context);
-/*
-dpm($user);
-
-if (in_array('carer employer active', $user->roles)) {
-	print 'yes';
-} else {
-	print 'no';
-}
-*/
-
-//print_r(user_roles());
+  global $user;
+  //print_r(user_roles());
 
   if ($context['entity_type'] == 'profile2'){
 	  if (in_array('carer employer active', $user->roles)) {
@@ -163,6 +126,7 @@ if (in_array('carer employer active', $user->roles)) {
 			$context['entity']->label = 'Carer Details for ' . $context['entity']->field_first_name_em['und'][0]['value'] . ' ' . $context['entity']->field_last_name_em['und'][0]['value'];
 	  }
   }
+  
   if ($context['entity_type'] == 'node' && $context['entity']->type == 'job'){
 	  if (in_array('carer', $user->roles)) {
     		$view_mode = 'job_details_carer';
@@ -170,6 +134,67 @@ if (in_array('carer employer active', $user->roles)) {
 	  }
   }
 }
+
+/** 
+ * Implementation of hook_form_alter(). 
+ */
+function cr_form_alter(&$form, $form_state, $form_id) {
+  switch ($form_id) {
+    //change create message notification
+    case 'message_node_form':
+      $form['actions']['submit']['#submit'][0] = 'cr_node_form_submit';
+      break;
+    case 'comment_node_message_form':
+      //dpm($form);
+      //$form['actions']['submit']['#value'] = 'Send';
+      break;
+	  case 'user_login':
+	    drupal_set_title(t('Log In'));
+      break;
+	  case 'user_pass':
+  	  drupal_set_title(t('Request New Password'));
+      break;
+	}
+}
+
+//function used to change system message for creating messages
+function cr_node_form_submit($form, &$form_state) {
+  $node = node_form_submit_build_node($form, $form_state);
+  $insert = empty($node->nid);
+  node_save($node);
+  $node_link = l(t('view'), 'node/' . $node->nid);
+  $watchdog_args = array('@type' => $node->type, '%title' => $node->title);
+  $t_args = array('@type' => node_type_get_name($node), '%title' => $node->title);
+
+  if ($insert) {
+	  if ($node->type == 'message') {
+      watchdog('content', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $node_link);
+      drupal_set_message(t('The message has been sent.', $t_args));
+    }
+    else {
+      watchdog('content', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $node_link);
+      drupal_set_message(t('@type %title has been created.', $t_args));
+    }
+  }
+  else {
+    watchdog('content', '@type: updated %title.', $watchdog_args, WATCHDOG_NOTICE, $node_link);
+    drupal_set_message(t('@type %title has been updated.', $t_args));
+  }
+  if ($node->nid) {
+    $form_state['values']['nid'] = $node->nid;
+    $form_state['nid'] = $node->nid;
+    $form_state['redirect'] = node_access('view', $node) ? 'node/' . $node->nid : '<front>';
+  }
+  else {
+    // In the unlikely case something went wrong on save, the node will be
+    // rebuilt and node form redisplayed the same way as in preview.
+    drupal_set_message(t('The post could not be saved.'), 'error');
+    $form_state['rebuild'] = TRUE;
+  }
+  // Clear the page and block caches.
+  cache_clear_all();
+}
+
 
 /*
 function cr_form_alter(&$form, $form_state, $form_id) {
@@ -334,3 +359,47 @@ function cr_field_widget_form_alter(&$element, &$form_state, $context) {
     }
   }
 }
+
+/*
+function cr_node_submit($node, $form, &$form_state) {
+  // Decompose the selected menu parent option into 'menu_name' and 'plid', if
+  // the form used the default parent selection widget.
+  drupal_get_messages();
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  drupal_set_message('The message has been sent.', 'status');
+  watchdog('hi','hi');
+}
+
+function cr_form_message_node_form_alter(&$form, $form_state, $form_id) {
+   //$form['buttons']['submit']['#submit'][0] = 'cr_node_form_submi';
+   unset($form['buttons']['submit']['#submit'][0]);
+  watchdog('test','testTEST');
+  dpm($form);
+}
+
+function cr_form_comment_form_alter(&$form, &$form_state) {
+    //unset($form['author']['name']);
+}
+*/
+
+/**
+ * Profile2 specific implementation of template_preprocess_entity().
+ */
+/*
+function cr_preprocess_entity_profile2(&$variables, $hook) {
+  $function = __FUNCTION__ . '_' . $variables['entity_type'];
+  if (function_exists($function)) {
+    $function($variables, $hook);
+  }
+
+	dpm($variables);
+}
+
+function cr_preprocess_profile2(&$variables)  {
+	//dpm($variables);
+	//print 'hello';
+}
+
+*/

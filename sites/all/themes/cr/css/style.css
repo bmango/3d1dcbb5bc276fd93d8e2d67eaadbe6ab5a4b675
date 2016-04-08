@@ -7845,10 +7845,12 @@ nav > ul.menu:first-child li ul li a {
 .page-profile-carer .field .field-label {
   clear: left;
 }
-.page-profile-carer .field.field-name-carer-profile-active .field-items {
+.page-profile-carer .field.field-name-carer-profile-active .field-items,
+.page-profile-carer .field.field-name-carer-membership-active .field-items {
   margin: 0 0 1em;
 }
-.page-profile-carer .field.field-name-carer-profile-active .field-items .cr-active {
+.page-profile-carer .field.field-name-carer-profile-active .field-items .cr-active,
+.page-profile-carer .field.field-name-carer-membership-active .field-items .cr-active {
   border: 1px solid #bbb;
   background: #ed2e6d;
   font-weight: normal;
@@ -7858,7 +7860,8 @@ nav > ul.menu:first-child li ul li a {
   color: #fff;
   font-size: 1.3em;
 }
-.page-profile-carer .field.field-name-carer-profile-active .field-items .cr-unactive {
+.page-profile-carer .field.field-name-carer-profile-active .field-items .cr-unactive,
+.page-profile-carer .field.field-name-carer-membership-active .field-items .cr-unactive {
   border: 1px solid #bbb;
   background: #ed2e6d;
   font-weight: normal;
@@ -8483,26 +8486,40 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
   list-style: none;
   margin: 0 15px 0 0;
 }
-.node-message.view-mode-full .group-message .field:nth-child(-n+2) {
+.node-message.view-mode-full .group-message .field-name-from,
+.node-message.view-mode-full .group-message .field-name-profile-name {
   margin: 0.2em 0 1.2em;
   clear: left;
   margin-bottom: 0.3em;
 }
-.node-message.view-mode-full .group-message .field:nth-child(-n+2) .field-label {
+.node-message.view-mode-full .group-message .field-name-from .field-label,
+.node-message.view-mode-full .group-message .field-name-profile-name .field-label {
   width: 150px;
   float: left;
   margin: 0 0 1em;
 }
-.node-message.view-mode-full .group-message .field:nth-child(-n+2) > .field-items {
+.node-message.view-mode-full .group-message .field-name-from > .field-items,
+.node-message.view-mode-full .group-message .field-name-profile-name > .field-items {
   margin: 0 0  1em 160px;
 }
-.node-message.view-mode-full .group-message .field:nth-child(-n+2) .field-label {
+.node-message.view-mode-full .group-message .field-name-from .field-label,
+.node-message.view-mode-full .group-message .field-name-profile-name .field-label {
   width: 110px;
   margin-bottom: 0.3em;
 }
-.node-message.view-mode-full .group-message .field:nth-child(-n+2) .field-items {
+.node-message.view-mode-full .group-message .field-name-from .field-items,
+.node-message.view-mode-full .group-message .field-name-profile-name .field-items {
   margin-left: 110px;
   margin-bottom: 0.3em;
+}
+.node-message.view-mode-full .group-message .field-name-profile-name.field {
+  margin-bottom: 11px;
+}
+.node-message.view-mode-full .group-message .employer-job {
+  float: right;
+}
+.node-message.view-mode-full .group-message .field-name-field-description {
+  clear: left;
 }
 .node-message.view-mode-full .group-message .field-name-field-description .field-items {
   border: 1px solid #ccc;
@@ -8516,6 +8533,9 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
 }
 .node-message.view-mode-full .group-message .field-name-field-attachment .field-item {
   margin: 4px 0 8px;
+}
+.node-message.view-mode-full .tabledrag-toggle-weight-wrapper {
+  display: none;
 }
 .node-message.view-mode-full #comments {
   margin: 50px 0;

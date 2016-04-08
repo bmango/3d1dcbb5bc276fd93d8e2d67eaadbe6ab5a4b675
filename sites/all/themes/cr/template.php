@@ -71,25 +71,7 @@ function cr_form_contact_site_form_alter(&$form, &$form_state) {
   drupal_set_title('Contact Us');
 }
 
-function cr_form_alter(&$form, $form_state, $form_id) {
-	if ($form_id == 'user_login') {
-	  drupal_set_title(t('Log In'));
-	}
-	if ($form_id == 'user_pass') {
-	  drupal_set_title(t('Request New Password'));
-	}
-	if($form_id == 'profile2_edit_carer_form') {
-		//dpm($form);
-		//$form['profile_carer']['field_profile_active']['#attributes'] =  array('data-toggle' => array('toggle'));
-		//$form['profile_carer']['field_first_name_cr']['#attributes'] =  array('data-toggle' => array('toggle'));
-		//['profile_carer']['field_first_name_cr']['#attributes']
-		//'#attributes' => array('class' => array('hidden')),
-	}
-	if($form_id == 'comment_node_message_form') {
-	    //unset($form['author']['_author']);
-	}
-}
-
+//Special theming profile active tickbox
 function cr_checkbox($variables) {
   $element = $variables ['element'];
   $element['#attributes']['type'] = 'checkbox';
@@ -168,11 +150,12 @@ function cr_preprocess_page(&$vars) {
 		$menu_object = menu_get_object();
 	  if (isset($menu_object->type)) :
 		 if ('message' == $menu_object->type) :
-		 
 		//if($vars['node']->type=='message' && !(empty($node->nid))) :
-				$profile = profile2_by_uid_load($vars['node']->uid, 'carer_employer');
+				//$profile = profile2_by_uid_load($vars['node']->uid, 'carer_employer');
+				$profile = cr_profile($vars['node']->uid);
 				//dpm($profile);
-				$vars['title'] = "Message from " . $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
+				//$vars['title'] = "Message from " . $profile->field_first_name_em['und'][0]['value'] . ' ' . $profile->field_surname_initial['und'][0]['value'];
+				$vars['title'] = "Message from " . $profile;
 				//$vars['title'] = "Message from " . cr_profile($vars['node']->uid);
 			endif;
 		endif;
