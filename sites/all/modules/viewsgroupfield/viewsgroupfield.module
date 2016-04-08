@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file viewsgroupfield.module
+ */
+
+/**
+ *  Implementation of hook_views_api().
+ */
+function viewsgroupfield_views_api() {
+  return array(
+    'api' => 2.0,
+    'path' => drupal_get_path('module', 'viewsgroupfield') . '/plugins',
+  );
+}

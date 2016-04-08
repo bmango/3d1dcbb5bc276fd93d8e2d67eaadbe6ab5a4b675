@@ -1,0 +1,9 @@
+name = Views Group Fields Plugin
+description = Allows views fields to be grouped into user defined sections.
+core = 7.x
+dependencies[] = views
+package = Views
+files[] = viewsgroupfield.module
+files[] = plugins/viewsgroupfield_plugin_row_fields.inc
+files[] = plugins/viewsgroupfield.views.inc
+files[] = theme/viewsgroupfield.theme.inc

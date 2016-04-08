@@ -1,0 +1,6 @@
+name = WWU Rules Extensions
+description = Provide miscellaneous useful Rules extensions (i.e. events, conditions, and actions).
+core = 7.x
+package = WWU Modules
+dependencies[] = rules
+files[] = wwu_rules_extensions.module

@@ -1,0 +1,119 @@
+<?php
+/**
+ * @file
+ * Uses the Rules API to add and define a new action for clearing site messages.
+ * See: https://www.drupal.org/node/878928
+ */
+ 
+ /**
+ * Implements hook_rules_action_info().
+ */
+function wwu_rules_extensions_rules_action_info() {
+  
+  $actions['wwu_rules_extensions_rules_action_clear_messages'] = array(
+    'label' => t('Clear system messages'),
+    'parameter' => array(
+      'type' => array(
+        'type' => 'token',
+        'label' => t('Clear messages of type'),
+        'options list' => 'wwu_rules_extensions_message_types',
+        'default value' => 'all',
+        'optional' => FALSE,
+      ),
+      'pattern' => array(
+        'type' => 'text',
+        'label' => t('Regular Expression'),
+        'description' => t('If specified, messages of the type specified above will only be cleared if their text matches this pattern.'),
+      	'optional' => TRUE,
+      ),
+    ),
+    'group' => t('System'),
+  );
+  $actions['wwu_rules_extensions_rules_action_clear_caches'] = array(
+  	'label' => t('Clear caches'),
+  	'parameter' => array(
+  	  'type' => array(
+  	    'type' => 'token',
+  	    'label' => t('Clear which cache'),
+  	    'options list' => 'wwu_rules_extensions_cache_types',
+  	    'default value' => 'all',
+  	    'optional' => FALSE,
+  	  ),
+  	),
+  	'group' => t('System'),
+  );
+  return $actions;
+}
+
+function wwu_rules_extensions_rules_action_clear_messages($type, $pattern) {
+	if($type=="all") {
+		$message_type = NULL;
+	} else {
+		$message_type = $type;
+	}
+	
+	//Clear all messages of specified type.
+	$all_messages = drupal_get_messages($message_type);
+	
+	//If no RE provided, done.
+	if(empty($all_messages) | !$pattern | $pattern == "") {
+		return;
+	}
+	
+	//Reset messages that do not match RE.
+	foreach($all_messages as $category => $messages) { //Go through each category of messages (in case type was not specified)
+		foreach($messages as $message) { //Go through each message in a category
+			if(preg_match($pattern, $message) != 1) {
+				drupal_set_message($message, $category);
+			}
+		}
+	}
+	return;
+}
+
+function wwu_rules_extensions_message_types() {
+  return array(
+  	'none' => t('All'),
+    'status' => t('Status'),
+    'warning' => t('Warning'),
+    'error' => t('Error'),
+  );
+}
+
+function wwu_rules_extensions_cache_types() {
+  return array(
+  	'all' => t('All'),
+    'class_registry' => t('Class Registry'),
+    'css_js' => t('CSS & JavaScript'),
+    'cache_menu' => t('Menu'),
+    'cache_page' => t('Page & Else'),
+    'theme_registry' => t('Theme Registry'),
+  );
+}
+
+function wwu_rules_extensions_rules_action_clear_caches($type) {
+	switch($type) {
+		case 'all':
+			drupal_flush_all_caches();
+			break;
+		case 'class_registry':
+			registry_rebuild();
+			break;
+		case 'css_js':
+			_drupal_flush_css_js();
+      		drupal_clear_css_cache();
+      		drupal_clear_js_cache();
+      		cache_clear_all('*', 'cache_page', TRUE);
+			break;
+		case 'cache_menu':
+			menu_rebuild();
+			break;
+		case 'cache_page':
+			cache_clear_all('*', 'cache_page', TRUE);
+			break;
+		case 'theme_registry':
+			system_rebuild_theme_data();
+      		drupal_theme_rebuild();
+			break;
+	}
+}
