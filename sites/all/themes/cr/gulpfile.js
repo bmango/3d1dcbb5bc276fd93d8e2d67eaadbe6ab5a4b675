@@ -12,7 +12,7 @@ gulp.task('deploy', ['less'], function() {
     var conn = ftp.create( {
         host:     'www.benmango.co.uk',
         user:     'u56392646',
-        password: 'anais123',
+        password: '*E*8|*%=8g',
 		  //host:			'hale.clook.net',
 		  //user:			'thefundi',
 		  //password:			'fp748tgL9F',

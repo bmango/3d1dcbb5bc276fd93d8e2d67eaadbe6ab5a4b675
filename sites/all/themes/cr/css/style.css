@@ -6885,9 +6885,11 @@ ul.secondary {
 .block:first-child h2.block-title {
   margin-top: 0;
 }
+/*
 p:last-child {
   margin-bottom: 0;
 }
+*/
 .region-help > .glyphicon {
   font-size: 18px;
   float: left;
@@ -7941,8 +7943,125 @@ nav > ul.menu:first-child li ul li a {
 .node-type-job .field.field-name-carer-favourite-links .field-items {
   margin-left: 0;
 }
-.node-job.node-unpublished .content:before,
-.node-job.node-unpublished:before {
+#job-node-form #edit-submit {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+#job-node-form #edit-submit:focus,
+#job-node-form #edit-submit.focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+#job-node-form #edit-submit:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+#job-node-form #edit-submit:active,
+#job-node-form #edit-submit.active,
+.open > .dropdown-toggle#job-node-form #edit-submit {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+#job-node-form #edit-submit:active:hover,
+#job-node-form #edit-submit.active:hover,
+.open > .dropdown-toggle#job-node-form #edit-submit:hover,
+#job-node-form #edit-submit:active:focus,
+#job-node-form #edit-submit.active:focus,
+.open > .dropdown-toggle#job-node-form #edit-submit:focus,
+#job-node-form #edit-submit:active.focus,
+#job-node-form #edit-submit.active.focus,
+.open > .dropdown-toggle#job-node-form #edit-submit.focus {
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+#job-node-form #edit-submit:active,
+#job-node-form #edit-submit.active,
+.open > .dropdown-toggle#job-node-form #edit-submit {
+  background-image: none;
+}
+#job-node-form #edit-submit.disabled:hover,
+#job-node-form #edit-submit[disabled]:hover,
+fieldset[disabled] #job-node-form #edit-submit:hover,
+#job-node-form #edit-submit.disabled:focus,
+#job-node-form #edit-submit[disabled]:focus,
+fieldset[disabled] #job-node-form #edit-submit:focus,
+#job-node-form #edit-submit.disabled.focus,
+#job-node-form #edit-submit[disabled].focus,
+fieldset[disabled] #job-node-form #edit-submit.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+#job-node-form #edit-submit .badge {
+  color: #fff;
+  background-color: #333;
+}
+#job-node-form #edit-submit .glyphicon-ok {
+  display: none;
+}
+#job-node-form #edit-publish {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+#job-node-form #edit-publish:focus,
+#job-node-form #edit-publish.focus {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #255625;
+}
+#job-node-form #edit-publish:hover {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+#job-node-form #edit-publish:active,
+#job-node-form #edit-publish.active,
+.open > .dropdown-toggle#job-node-form #edit-publish {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+#job-node-form #edit-publish:active:hover,
+#job-node-form #edit-publish.active:hover,
+.open > .dropdown-toggle#job-node-form #edit-publish:hover,
+#job-node-form #edit-publish:active:focus,
+#job-node-form #edit-publish.active:focus,
+.open > .dropdown-toggle#job-node-form #edit-publish:focus,
+#job-node-form #edit-publish:active.focus,
+#job-node-form #edit-publish.active.focus,
+.open > .dropdown-toggle#job-node-form #edit-publish.focus {
+  color: #fff;
+  background-color: #398439;
+  border-color: #255625;
+}
+#job-node-form #edit-publish:active,
+#job-node-form #edit-publish.active,
+.open > .dropdown-toggle#job-node-form #edit-publish {
+  background-image: none;
+}
+#job-node-form #edit-publish.disabled:hover,
+#job-node-form #edit-publish[disabled]:hover,
+fieldset[disabled] #job-node-form #edit-publish:hover,
+#job-node-form #edit-publish.disabled:focus,
+#job-node-form #edit-publish[disabled]:focus,
+fieldset[disabled] #job-node-form #edit-publish:focus,
+#job-node-form #edit-publish.disabled.focus,
+#job-node-form #edit-publish[disabled].focus,
+fieldset[disabled] #job-node-form #edit-publish.focus {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+#job-node-form #edit-publish .badge {
+  color: #5cb85c;
+  background-color: #fff;
+}
+.node-job.view-mode-full.node-unpublished .content:before,
+.node-job.view-mode-full.node-unpublished:before {
   content: "UNPUBLISHED";
   padding: 8px 0;
   text-align: center;
@@ -8562,5 +8681,66 @@ fieldset[disabled] .carer-list .view-filters .views-exposed-widget.views-reset-b
 }
 .node-message.view-mode-full #edit-author--2 {
   display: none;
+}
+.agency-memberships .view-header {
+  margin: 0 0 1.6em;
+}
+.agency-memberships .views-row {
+  margin: 0 0 45px;
+  padding: 15px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #eee;
+  font-weight: 500;
+  width: 45%;
+  box-sizing: border-box;
+  float: left;
+}
+.agency-memberships .views-row:nth-child(2n-1) {
+  margin-right: 40px;
+}
+.agency-memberships .views-row:nth-child(-n+2) {
+  background: #d9a778;
+}
+.agency-memberships .views-row:nth-child(3),
+.agency-memberships .views-row:nth-child(4) {
+  background: #dadada;
+}
+.agency-memberships .views-row:nth-child(n+5) {
+  background: #ffe34d;
+}
+.agency-memberships .views-row .commerce-product-title {
+  font-weight: bold;
+  font-size: 1.3em;
+  margin: 0 0 .4em;
+}
+.agency-memberships .views-row .commerce-product-title .commerce-product-title-label {
+  display: none;
+}
+.agency-memberships .views-row .field-name-body {
+  font-weight: 500;
+}
+.agency-memberships .views-row .field-name-commerce-license-duration {
+  margin: 0 0 1.1em;
+  float: left;
+}
+.agency-memberships .views-row .field-name-commerce-price {
+  float: right;
+}
+.agency-memberships .views-row .field-name-field-product {
+  clear: both;
+  margin: 1.1em 0 0;
+}
+#user-register-form .form-item-pass > label.control-label {
+  display: none;
+}
+#user-register-form .form-item-pass .form-item-pass-pass1 span.glyphicon {
+  display: none;
+}
+#user-register-form .form-item-pass .form-item-pass-pass1 span.glyphicon.glyphicon-warning-sign {
+  display: block;
+}
+#user-register-form .form-actions {
+  margin: 1em 0;
 }
 /*# sourceMappingURL=style.css.map */

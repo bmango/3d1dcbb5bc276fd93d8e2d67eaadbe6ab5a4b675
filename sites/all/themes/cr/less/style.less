@@ -424,9 +424,23 @@ nav > ul.menu:first-child {
 	}
 }
 
+#job-node-form {
+  #edit-submit {
+    .btn-default;
+    
+    .glyphicon-ok {
+      display:none;
+    }
+  }
+  
+  #edit-publish {
+    .btn-success;
+  }
+}
+
 .node-job {
 	
-	&.node-unpublished .content:before, &.node-unpublished:before {
+	&.view-mode-full.node-unpublished .content:before, &.view-mode-full.node-unpublished:before {
 		content:"UNPUBLISHED";
 		//font-weight:bold;
 		padding:8px 0;
@@ -887,7 +901,7 @@ ul.tabs--primary {
 		}
 		
 		.title.comment-form {
-			margin:40px 0 20px;
+			margin:40px 0 20px; 
 		}
 		
 		#comment-form {
@@ -906,4 +920,88 @@ ul.tabs--primary {
 			display:none;
 		}
 	}
+}
+
+.agency-memberships {
+  .view-header {
+    margin:0 0 1.6em;
+  }
+  
+  .views-row {
+    margin:0 0 45px;
+    padding:15px 20px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    background:#eee;
+    font-weight:500;
+    width:45%;
+    box-sizing:border-box;
+    float:left;
+    
+    &:nth-child(2n-1) {
+      margin-right:40px;
+    }
+    
+    &:nth-child(-n+2) {
+      background:lighten(#B87333, 20%);
+    }
+    
+    &:nth-child(3), &:nth-child(4) {
+      background:lighten(silver, 10%);
+    }
+    
+    &:nth-child(n+5) {
+      background:lighten(gold, 15%);
+    }
+  
+    .commerce-product-title {
+      font-weight:bold;
+      font-size:1.3em;
+      margin:0 0 .4em;
+      
+      .commerce-product-title-label {
+        display:none;
+      }
+    }
+    
+    .field-name-body {
+      font-weight:500;
+    }
+    
+    .field-name-commerce-license-duration {
+      margin:0 0 1.1em;
+      float:left;
+    }
+    
+    .field-name-commerce-price {
+      float:right;
+    }
+    
+    .field-name-field-product {
+      clear:both;
+      margin:1.1em 0 0;
+    }
+  }
+}
+
+#user-register-form {
+  .form-item-pass {
+    > label.control-label {
+      display:none;
+    }
+    
+    .form-item-pass-pass1 {
+      span.glyphicon {
+        display:none;
+        
+        &.glyphicon-warning-sign {
+          display:block;
+        }
+      }
+    }
+  }
+  
+  .form-actions {
+    margin:1em 0;
+  }
 }

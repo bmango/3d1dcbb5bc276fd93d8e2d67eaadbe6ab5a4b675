@@ -35,7 +35,7 @@ function cr_profile($cr_uid) {
  * @param $items
  */
 function cr_menu_alter(&$items) {
-	$items['cart']['access callback'] = 'user_is_logged_in';
+	//$items['cart']['access callback'] = 'user_is_logged_in';
 }
 
 
@@ -115,6 +115,7 @@ function cr_profile2_presave($profile) {
 	endif;
 }
 
+//show correct view mode to user
 function cr_entity_view_mode_alter(&$view_mode, $context) {
   global $user;
   //print_r(user_roles());

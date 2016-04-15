@@ -6425,12 +6425,17 @@ function element_sort_by_title($a, $b) {
  *   An element type as defined by hook_element_info().
  */
 function element_info($type) {
-  // Use the advanced drupal_static() pattern, since this is called very often.
-  static $drupal_static_fast;
-  if (!isset($drupal_static_fast)) {
-    $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__);
+  global $theme;
+
+  // Only statically cache element_info() if the theme has been initialized.
+  if (isset($theme)) {
+    // Use the advanced drupal_static() pattern since this is called very often.
+    static $drupal_static_fast;
+    if (!isset($drupal_static_fast)) {
+      $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__);
+    }
+    $cache = &$drupal_static_fast['cache'];
   }
-  $cache = &$drupal_static_fast['cache'];
 
   if (!isset($cache)) {
     $cache = module_invoke_all('element_info');
