@@ -1,0 +1,16 @@
+package = Mail
+name = HTML Mail
+description = Enables HTML in system emails.
+php = 5.2
+files[] = htmlmail.mail.inc
+files[] = htmlmail.test
+dependencies[] = mailsystem
+core = 7.x
+configure = admin/config/system/htmlmail
+
+; Information added by Drupal.org packaging script on 2016-02-27
+version = "7.x-2.65+13-dev"
+core = "7.x"
+project = "htmlmail"
+datestamp = "1456605849"
+

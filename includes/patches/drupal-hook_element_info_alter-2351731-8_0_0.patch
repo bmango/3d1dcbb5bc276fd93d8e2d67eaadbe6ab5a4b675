@@ -1,0 +1,141 @@
+From 0ab69a42a599cce8d75dcfd624ec383179695d69 Mon Sep 17 00:00:00 2001
+From: Mark Carver <mark.carver@me.com>
+Date: Mon, 9 Mar 2015 12:32:14 -0500
+Subject: Issue #2351731 by Mark Carver, tstoeckler: hook_element_info_alter()
+ does not always get invoked in themes
+
+---
+ includes/common.inc                                | 15 ++++++----
+ modules/simpletest/tests/theme.test                | 13 +++++++++
+ modules/simpletest/tests/theme_test.module         | 33 ++++++++++++++++++++++
+ .../tests/themes/test_theme/template.php           | 15 ++++++++++
+ 4 files changed, 71 insertions(+), 5 deletions(-)
+
+diff --git a/includes/common.inc b/includes/common.inc
+index 631d246..e3190b7 100644
+--- a/includes/common.inc
++++ b/includes/common.inc
+@@ -6349,12 +6349,17 @@ function element_sort_by_title($a, $b) {
+  *   An element type as defined by hook_element_info().
+  */
+ function element_info($type) {
+-  // Use the advanced drupal_static() pattern, since this is called very often.
+-  static $drupal_static_fast;
+-  if (!isset($drupal_static_fast)) {
+-    $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__);
++  global $theme;
++
++  // Only statically cache element_info() if the theme has been initialized.
++  if (isset($theme)) {
++    // Use the advanced drupal_static() pattern since this is called very often.
++    static $drupal_static_fast;
++    if (!isset($drupal_static_fast)) {
++      $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__);
++    }
++    $cache = &$drupal_static_fast['cache'];
+   }
+-  $cache = &$drupal_static_fast['cache'];
+
+   if (!isset($cache)) {
+     $cache = module_invoke_all('element_info');
+diff --git a/modules/simpletest/tests/theme.test b/modules/simpletest/tests/theme.test
+index f1a743e..9f15560 100644
+--- a/modules/simpletest/tests/theme.test
++++ b/modules/simpletest/tests/theme.test
+@@ -90,6 +90,19 @@ class ThemeTestCase extends DrupalWebTestCase {
+   }
+
+   /**
++   * Ensures theme hook_element_info_alter() implementations can run.
++   */
++  function testElementInfoAlter() {
++    variable_set('theme_default', 'test_theme');
++
++    $this->drupalGet('theme-test/element-info-alter');
++    $this->assertText('hook_element_info_alter() invoked in themes!');
++
++    $this->drupalGet('theme-test/element-info-alter-access-render');
++    $this->assertText('hook_element_info_alter() invoked in themes!');
++  }
++
++  /**
+    * Ensures a theme's .info file is able to override a module CSS file from being added to the page.
+    *
+    * @see test_theme.info
+diff --git a/modules/simpletest/tests/theme_test.module b/modules/simpletest/tests/theme_test.module
+index 61a12bb..c4e4bce 100644
+--- a/modules/simpletest/tests/theme_test.module
++++ b/modules/simpletest/tests/theme_test.module
+@@ -48,6 +48,18 @@ function theme_test_menu() {
+     'theme callback' => '_theme_custom_theme',
+     'type' => MENU_CALLBACK,
+   );
++  $items['theme-test/element-info-alter'] = array(
++    'title' => 'Element information alteration',
++    'page callback' => '_theme_test_element_info_alter',
++    'access callback' => TRUE,
++    'type' => MENU_CALLBACK
++  );
++  $items['theme-test/element-info-alter-access-render'] = array(
++    'title' => 'Element information alteration',
++    'page callback' => '_theme_test_element_info_alter',
++    'access callback' => '_theme_test_element_info_alter_access',
++    'type' => MENU_CALLBACK
++  );
+   $items['theme-test/hook-init'] = array(
+     'page callback' => 'theme_test_hook_init_page_callback',
+     'access callback' => TRUE,
+@@ -127,6 +139,27 @@ function _theme_test_suggestion() {
+ }
+
+ /**
++ * Page callback, renders an item element.
++ */
++function _theme_test_element_info_alter() {
++  $build['test'] = array(
++    '#type' => 'item',
++    '#title' => 'Test',
++    '#markup' => 'hook_element_info_alter() not invoked in themes!',
++  );
++  return $build;
++}
++
++/**
++ * Access callback, calls drupal_render().
++ */
++function _theme_test_element_info_alter_access() {
++  $element = array('#markup' => 'Test');
++  drupal_render($element);
++  return TRUE;
++}
++
++/**
+  * Theme function for testing theme('theme_test_foo').
+  */
+ function theme_theme_test_foo($variables) {
+diff --git a/modules/simpletest/tests/themes/test_theme/template.php b/modules/simpletest/tests/themes/test_theme/template.php
+index 8275818..7c62305 100644
+--- a/modules/simpletest/tests/themes/test_theme/template.php
++++ b/modules/simpletest/tests/themes/test_theme/template.php
+@@ -17,3 +17,18 @@ function test_theme_theme_test__suggestion($variables) {
+ function test_theme_theme_test_alter_alter(&$data) {
+   $data = 'test_theme_theme_test_alter_alter was invoked';
+ }
++
++/**
++ * Implements hook_element_info_alter().
++ */
++function test_theme_element_info_alter(&$elements) {
++  array_unshift($elements['item']['#pre_render'], 'test_theme_link_pre_render');
++}
++
++/**
++ * Test pre-render callback for the link element.
++ */
++function test_theme_link_pre_render($element) {
++  $element['#markup'] = 'hook_element_info_alter() invoked in themes!';
++  return $element;
++}
+--
+2.2.2
+
